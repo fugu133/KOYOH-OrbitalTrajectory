@@ -5,10 +5,28 @@ var viewer = new Cesium.Viewer("cesium", {
    shouldAnimate: true,
 });
 
-viewer.scene.globe.enableLightning = true;
+const scene = viewer.scene;
+const globe = scene.globe;
+
+globe.showGroundAtmosphere = true;
+globe.enableLighting = true;
 
 viewer.dataSources.add(
    Cesium.CzmlDataSource.load("koyoh_orbit.json")
 );
 
 viewer.camera.flyHome(0);
+
+// Sandcastle.addToggleButton(
+//    "Ground atmosphere",
+//    globe.showGroundAtmosphere,
+//    function (checked) {
+//       globe.showGroundAtmosphere = checked;
+//    }
+// );
+
+// Sandcastle.addToggleButton("Lighting", globe.enableLighting, function (
+//    checked
+// ) {
+//    globe.enableLighting = checked;
+// });
