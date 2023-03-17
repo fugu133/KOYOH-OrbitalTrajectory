@@ -5,6 +5,8 @@ var viewer = new Cesium.Viewer("cesium", {
    shouldAnimate: true,
 });
 
+viewer.scene.globe.enableLightning = true;
+
 viewer.dataSources.add(
    Cesium.CzmlDataSource.load("koyoh_orbit.json")
 );
