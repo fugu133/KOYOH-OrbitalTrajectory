@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"eslint.enable": true,
+		"javascript.validate.enable": false
+	}
+}
