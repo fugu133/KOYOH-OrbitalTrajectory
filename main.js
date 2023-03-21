@@ -38,10 +38,10 @@
 
    lensFlare.enabled = true;
    lensFlare.uniforms.intensity = 3;
-   lensFlare.uniforms.distortion = 15;
+   lensFlare.uniforms.distortion = 5;
    lensFlare.uniforms.ghostDispersal = 0.5;
    lensFlare.uniforms.haloWidth = 0.5;
-   lensFlare.uniforms.dirtAmount = 0.5;
+   lensFlare.uniforms.dirtAmount = 0.3;
    lensFlare.uniforms.earthRadius = Cesium.Ellipsoid.WGS84.maximumRadius;
 
    var czml = new Cesium.CzmlDataSource();
