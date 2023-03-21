@@ -14,7 +14,6 @@
    }
 
    // ビューワー作成
-   Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4NmY1MzU3MC04OGM4LTQ0YzctOWNjNC03YzIwOTlhODQ2ZDgiLCJpZCI6MTI5MTU3LCJpYXQiOjE2NzkwMzg4NDB9.I18hj604p8pbNdg73hVjDUqpzyf5jzrYVkXleEi4Pp4";
    var viewer = new Cesium.Viewer("cesium", {
       terrainProvider: Cesium.createWorldTerrain(),
       shouldAnimate: false,
@@ -22,11 +21,12 @@
       geocoder: false
    });
 
-   viewer.resolutionScale = window.devicePixelRatio
-
-   // 表示設定
+   // ビューワー設定
    const scene = viewer.scene;
    const globe = scene.globe;
+   viewer._cesiumWidget._creditContainer.parentNode.removeChild(viewer._cesiumWidget._creditContainer);
+   viewer.resolutionScale = window.devicePixelRatio;
+   viewer.resolutionScale = window.devicePixelRatio
    scene.camera.flyTo(homeCameraView);
    globe.showGroundAtmosphere = true;
    globe.enableLighting = true;
