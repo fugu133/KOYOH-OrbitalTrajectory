@@ -8,7 +8,7 @@
    const Matrix3 = Cesium.Matrix3;
    const Matrix4 = Cesium.Matrix4;
 
-   const defaultClockScale = 200;
+   const defaultClockScale = 100;
    const homeCameraView = {
       destination: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144, 25000000)
    }
