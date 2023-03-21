@@ -31,6 +31,19 @@
    globe.showGroundAtmosphere = true;
    globe.enableLighting = true;
 
+   // レンズフレア
+   const lensFlare = scene.postProcessStages.add(
+      Cesium.PostProcessStageLibrary.createLensFlareStage()
+   );
+
+   lensFlare.enabled = true;
+   lensFlare.uniforms.intensity = 3;
+   lensFlare.uniforms.distortion = 15;
+   lensFlare.uniforms.ghostDispersal = 0.5;
+   lensFlare.uniforms.haloWidth = 0.5;
+   lensFlare.uniforms.dirtAmount = 0.5;
+   lensFlare.uniforms.earthRadius = Cesium.Ellipsoid.WGS84.maximumRadius;
+
    var czml = new Cesium.CzmlDataSource();
 
    // ファイル入力
