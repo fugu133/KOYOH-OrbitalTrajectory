@@ -31,6 +31,24 @@
    globe.showGroundAtmosphere = true;
    globe.enableLighting = true;
 
+   // 地球自転に合わせたカメラワーク
+   scene.postUpdate.addEventListener(
+      (scene, time) => {
+         if (scene.mode !== Cesium.SceneMode.SCENE3D) {
+            return;
+         }
+
+         const icrfToFixed = Transforms.computeIcrfToFixedMatrix(time);
+         if (Cesium.defined(icrfToFixed)) {
+            const camera = viewer.camera;
+            const offset = Cartesian3.clone(camera.position);
+            const transform = Matrix4.fromRotationTranslation(icrfToFixed);
+            camera.lookAtTransform(transform, offset);
+         }
+      }
+   );
+
+
    // レンズフレア
    const lensFlare = scene.postProcessStages.add(
       Cesium.PostProcessStageLibrary.createLensFlareStage()
