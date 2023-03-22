@@ -132,7 +132,7 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(
 
 
 addToolbarButton("ICRF view", earthView);
-addToolbarButton("ECIF view", satelliteView);
+addToolbarButton("ECEF view", satelliteView);
 
 var icrfSelect = false;
 
