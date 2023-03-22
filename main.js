@@ -131,8 +131,8 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(
 );
 
 
-addToolbarButton("Earth view", earthView);
-addToolbarButton("Satellite view", satelliteView);
+addToolbarButton("ICRF view", earthView);
+addToolbarButton("ECIF view", satelliteView);
 
 var icrfSelect = false;
 
@@ -148,18 +148,18 @@ function addToolbarButton(text, onclick) {
 }
 
 function satelliteView() {
-   viewer.trackedEntity = undefined;
+   // viewer.trackedEntity = undefined;
 
    if (icrfSelect) {
       scene.postUpdate.removeEventListener(icrfView);
       icrfSelect = false;
    }
 
-   viewer.trackedEntity = satelliteEntity;
+   // viewer.trackedEntity = satelliteEntity;
 }
 
 function earthView() {
-   viewer.trackedEntity = undefined;
+   // viewer.trackedEntity = undefined;
 
    if (!icrfSelect) {
       scene.postUpdate.addEventListener(icrfView);

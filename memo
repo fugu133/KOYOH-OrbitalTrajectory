@@ -1,0 +1,63 @@
+function satelliteView() {
+   if (scene.mode !== Cesium.SceneMode.SCENE3D) {
+      return;
+   }
+
+   viewer.trackedEntity = undefined;
+
+   if (icrfSelect) {
+      scene.postUpdate.removeEventListener(icrfView);
+   }
+}
+
+function earthView() {
+   if (!icrfSelect) {
+      scene.postUpdate.addEventListener(icrfView);
+   }
+   viewer.camera.setView({ destination: homeCameraView });
+   viewer.trackedEntity = earthCoreEntity;
+}
+
+function icrfView() {
+   if (scene.mode !== Cesium.SceneMode.SCENE3D) {
+      return;
+   }
+
+   const icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix(time);
+   if (Cesium.defined(icrfToFixed)) {
+      const camera = viewer.camera;
+      const offset = Cesium.Cartesian3.clone(camera.position);
+      const transform = Cesium.Matrix4.fromRotationTranslation(
+         icrfToFixed
+      );
+      camera.lookAtTransform(transform, offset);
+   }
+
+   icrfSelect = true;;
+}
+
+// デフォルトは地球自転に合わせたカメラワーク
+scene.postUpdate.addEventListener(icrfView);
+
+
+var gs = {
+   id: "KanazawaUnivGs",
+   name: "KOYOH Ground Station",
+   billboard: {
+      image: "resource/image/Kanazawa_University_logo.png",
+      scale: 0.2,
+   },
+   position: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144)
+};
+
+var groundStationEntity = viewer.entities.add(gs);
+
+var earthCore = {
+   id: "core",
+   position: Cesium.Cartesian3(0, 0, 0),
+   point: { show: false }
+};
+
+var earthCoreEntity = viewer.entities.add(earthCore);
+
+viewer.trackedEntity = satelliteEntity;
