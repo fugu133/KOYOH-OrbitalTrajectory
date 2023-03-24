@@ -28,7 +28,7 @@ viewer._cesiumWidget._creditContainer.parentNode.removeChild(viewer._cesiumWidge
 viewer.resolutionScale = window.devicePixelRatio;
 viewer.resolutionScale = window.devicePixelRatio
 scene.camera.flyTo(homeCameraView);
-globe.showGroundAtmosphere = true;
+// globe.showGroundAtmosphere = true;
 globe.enableLighting = true;
 
 // レンズフレア
@@ -64,21 +64,14 @@ fetch(satUrl)
          let pp = i * pBlockSize;
          let t_i = JulianDate.addSeconds(epoch, qIb[qp], new JulianDate());
          let qIb_i = new Quaternion(qIb[qp + 1], qIb[qp + 2], qIb[qp + 3], qIb[qp + 4]);
-         // let pos_i = new Cartesian3.fromDegrees(pos[pp+1], pos[pp+2], pos[pp+3]);
-         // let qLe_i = Quaternion.fromRotationMatrix(Matrix4.getMatrix3(Transforms.eastNorthUpToFixedFrame(pos_i), new Matrix3())); // ENUからECEF    
-         // let qEi_i = Quaternion.fromRotationMatrix(Transforms.computeFixedToIcrfMatrix(t_i)); // ECEFからICRF
-         // let qLi_i = Quaternion.multiply(qLe_i, qEi_i, new Quaternion()); // q_vi = q_ve * q_ei 
-         // let qLb_i = Quaternion.multiply(qLi_i, qIb_i, new Quaternion());
-         // let qLb_i = Quaternion.multiply(Quaternion.inverse(qEi_i, new Quaternion()), qIb_i, new Quaternion());
-
          let qEi_i = Quaternion.fromRotationMatrix(Transforms.computeIcrfToFixedMatrix(t_i)); // ECEFからICRF
-         let qLb_i = Quaternion.multiply(qEi_i, qIb_i, new Quaternion());
-         qIb[qp + 1] = qLb_i.x;
-         qIb[qp + 2] = qLb_i.y;
-         qIb[qp + 3] = qLb_i.z;
-         qIb[qp + 4] = qLb_i.w;
+         let qEb_i = Quaternion.multiply(qEi_i, qIb_i, new Quaternion());
+         qIb[qp + 1] = qEb_i.x;
+         qIb[qp + 2] = qEb_i.y;
+         qIb[qp + 3] = qEb_i.z;
+         qIb[qp + 4] = qEb_i.w;
 
-         pos[pp + 3] *= 3; // スケールアップ
+         // pos[pp + 3] *= 3; // スケールアップ
       }
 
       var doc = {
@@ -103,10 +96,10 @@ var gs = {
    id: "KanazawaUnivGs",
    name: "KOYOH Ground Station",
    billboard: {
-      image: "resource/image/Kanazawa_University_logo.png",
+      image: "resource/image/Kanazawa_University_logo.svg",
       scale: 0.2,
    },
-   position: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144)
+   position: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144, 25)
 };
 
 var groundStationEntity = viewer.entities.add(gs);

@@ -8,6 +8,8 @@ node_modules/
 *.exe
 *.o
 *.so
+*.fbx
+*.blend1
+*.blend
 
 koyoh.glb
-koyoh.fbx
