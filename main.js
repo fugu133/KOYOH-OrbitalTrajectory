@@ -10,7 +10,7 @@ const Matrix4 = Cesium.Matrix4;
 
 const defaultClockScale = 100;
 const homeCameraView = {
-   destination: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144, 25000000)
+   destination: Cesium.Cartesian3.fromDegrees(136.70510974114885, 36.54389351031144, 20000000)
 }
 
 // ビューワー作成
@@ -28,7 +28,7 @@ viewer._cesiumWidget._creditContainer.parentNode.removeChild(viewer._cesiumWidge
 viewer.resolutionScale = window.devicePixelRatio;
 viewer.resolutionScale = window.devicePixelRatio
 scene.camera.flyTo(homeCameraView);
-// globe.showGroundAtmosphere = true;
+globe.showGroundAtmosphere = true;
 globe.enableLighting = true;
 
 // レンズフレア
